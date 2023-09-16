@@ -1,21 +1,21 @@
-require_relative './enumerable'
+require_relative 'enumerable'
 class MyList
-include MyEnumerable
+  include MyEnumerable
   attr_reader :list
-  
+
   def initialize(list)
     @list = list
   end
 
-  def each
-    @list.each { |item| yield item }
+  def each(&block)
+    @list.each(&block)
   end
 end
 
 list = MyList.new([1, 2, 3, 4])
-puts list.all? { |e| e < 5 }
-puts list.all? { |e| e > 5 }
-puts list.any? { |e| e == 2 }
-puts list.any? { |e| e == 5 }
-puts list.filter { |e| e.even? }
+puts(list.all? { |e| e < 5 })
+puts(list.all? { |e| e > 5 })
+puts(list.any? { |e| e == 2 })
+puts(list.any? { |e| e == 5 })
+puts(list.filter(&:even?))
 list.each { |e| print "#{e} " }
